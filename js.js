@@ -124,12 +124,7 @@ function Box1__init() {
     $tabs.removeClass("active");
     $this.addClass("active");
 
-    $(".box-1__main ul li")
-      .hide()
-      .removeClass("active")
-      .eq(thisIndex)
-      .addClass("active")
-      .fadeIn(500);
+    $(".box-1__main ul li").hide().removeClass("active").eq(thisIndex).addClass("active").fadeIn(500);
   });
 
   // 왼쪽 버튼
@@ -154,7 +149,50 @@ function Box1__init() {
   }
 }
 
-Box1__init();
+// Box1__init();
+
+function sec2_swiper__init() {
+  const target = document.querySelector(".section_2 .swiper-container");
+  let $tabList = $(".box-1__head ul");
+  let $tabs = $tabList.find("li");
+
+  let sec2_swiper = new Swiper(target, {
+    slidesPerView: 3,
+    loop: true,
+    centeredSlides: true,
+    navigation: {
+      nextEl: ".section_2 .head-btn.btn-next",
+      prevEl: ".section_2 .head-btn.btn-prev",
+    },
+  });
+  sec2_findIndex();
+}
+
+function sec2_findIndex() {
+  const swiperSlide = document.querySelectorAll(".section_2 .swiper-slide");
+  let $tabBoxList = $(".box-1__main");
+  let $tabsBox = $tabBoxList.find("li");
+
+  let activeIndex;
+
+  let target = $(".section_2 .box-1__head");
+
+  target.click(function () {
+    swiperSlide.forEach((el, index) => {
+      let hasClass = el.classList.contains("swiper-slide-active");
+      if (hasClass) {
+        activeIndex = index;
+      }
+    });
+
+    $tabsBox.removeClass("active");
+    $tabsBox.eq(activeIndex).addClass("active");
+  });
+}
+window.addEventListener("load", () => {
+  sec2_swiper__init();
+});
+
 // 2섹션 끝
 // 버튼 클릭 이벤트
 prevBtn.addEventListener("click", () => {
