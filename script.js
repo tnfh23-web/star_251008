@@ -158,6 +158,23 @@ function initSection2Swiper() {
       nextEl: ".section_2 .head-btn.btn-next",
       prevEl: ".section_2 .head-btn.btn-prev",
     },
+    spaceBetween: 30,
+    breakpoints: {
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      768: {
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+        centeredSlides: true,
+      },
+      480: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        centeredSlides: true,
+      },
+    },
     on: {
       slideChange: function () {
         const index = this.realIndex;
@@ -193,11 +210,11 @@ var eventSwiper = new Swiper(".event-swiper", {
   spaceBetween: 30,
   breakpoints: {
     1024: {
-      slidesPerView: 2.5,
+      slidesPerView: 3,
       spaceBetween: 30,
     },
     768: {
-      slidesPerView: 1.5,
+      slidesPerView: 2,
       spaceBetween: 20,
       centeredSlides: true,
     },
