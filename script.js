@@ -205,7 +205,7 @@ function initSection2Swiper() {
         spaceBetween: 30,
       },
       768: {
-        slidesPerView: 1.5,
+        slidesPerView: 1,
         spaceBetween: 20,
         centeredSlides: true,
       },
@@ -214,9 +214,10 @@ function initSection2Swiper() {
         spaceBetween: 10,
         centeredSlides: true,
       },
-      370: {
+      300: {
         slidesPerView: 1,
         centeredSlides: true,
+        spaceBetween: 10,
       },
     },
     on: {
