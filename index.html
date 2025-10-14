@@ -14,7 +14,7 @@
   </head>
   <body>
     <!--------------------------------------------------- 로딩화면 ------------------------------------>
-    <!-- <div class="loading"></div> -->
+    <div class="loading"></div>
     <!------------------------------------------------------- topbar ------------------------------------------------------------>
     <header>
       <div class="top-bar">
@@ -23,9 +23,9 @@
           <span style="width: 30px"></span>
           <span style="width: 15px"></span>
         </div>
-        <h1 class="logo_box">
+        <div class="logo_box">
           <a href=""><img src="img/logo.png" alt="" /></a>
-        </h1>
+        </div>
       </div>
       <!---------------------------------------------------- sidebar -------------------------------->
       <nav class="slide-menu">
@@ -495,10 +495,12 @@
         <div class="section section_4" style="min-height: 950px">
           <!-- 왼쪽 텍스트 박스 -->
           <div class="event-text-box">
-            <h2>Event & Benefit</h2>
-            <p class="p-text-1">스타스케이프 풀빌라가</p>
-            <p class="p-text-2">준비한 특별한 이벤트와 혜택</p>
-            <a href="@">모든 이벤트 보기</a>
+            <h2 data-aos="fade-up" data-aos-duration="800">Event & Benefit</h2>
+            <p class="p-text-1" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">스타스케이프 풀빌라가</p>
+            <p class="p-text-2" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">준비한 특별한 이벤트와 혜택</p>
+            <div class="a-box" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+              <a href="">모든 이벤트 보기</a>
+            </div>
 
             <!-- 페이지네이션 + 버튼 묶음 -->
             <div class="event-controls">
@@ -553,7 +555,7 @@
       <!----------------------------------------------- 섹션5 --------------------------------------------------->
       <section id="sec5">
         <div class="section section_5">
-          <div class="text-box" data-aos="fade-up" data-aos-duration="2500">
+          <div class="text-box" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
             <h2>Escape to Serenity</h2>
             <p>
               푸른 바다와 함께하는 프라이빗한 공간
@@ -562,7 +564,7 @@
             </p>
             <a href="@">오시는길 확인</a>
           </div>
-          <div class="img-box" data-aos="fade-up" data-aos-duration="1000">
+          <div class="img-box" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
             <img src="figmaimg/section-5/5sec-img.jpg" alt="" />
           </div>
         </div>
@@ -633,6 +635,7 @@
         },
       });
     </script>
+
     <!-- AOS -->
     <script>
       AOS.init();
