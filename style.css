@@ -711,6 +711,8 @@ header .top-bar .logo_box > a {
   background: #4aa0b5;
   color: white;
   font-family: "Pretendard", sans-serif;
+  position: relative;
+  min-height: 950px;
 }
 
 .section_4 .event-text-box {
@@ -770,6 +772,9 @@ header .top-bar .logo_box > a {
   font-size: 24px;
 }
 .section_4 .event-controls {
+  position: absolute;
+  top: 50%;
+  left: 9%;
   display: flex;
   align-items: center;
   gap: 15px; /* 숫자와 버튼 사이 간격 */
@@ -995,61 +1000,22 @@ header .top-bar .logo_box > a {
 /* 2섹션 */
 
 @media (max-width: 768px) {
-  .section_2 {
-    height: auto;
-  }
-
-  .section_2 h1 {
-    font-size: 38px;
-    margin-bottom: 30px;
-  }
-
-  .section_2 .box-1__head {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .section_2 .box-1__head .tab-wrapper {
-    width: 40%;
-  }
-
-  .section_2 .box-1__head ul li a {
-    font-size: 16px;
-  }
-
   .section_2 .part-wrap {
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
+    display: block;
+    padding: 0;
   }
 
-  .section_2 .part {
+  .section_2 .room-swiper {
     width: 100%;
-    height: auto;
-    margin-inline: 0;
   }
 
-  .section_2 .part img {
-    height: 360px;
-    filter: brightness(0.6);
+  .section_2 .swiper-slide.part {
+    margin: 0 auto;
   }
 
-  .section_2 .img-text h3 {
-    font-size: 28px;
-  }
-  .section_2 .img-text p {
-    font-size: 16px;
-  }
-
-  .section_2 .hover-text h3 {
-    font-size: 28px;
-  }
-  .section_2 .hover-text p {
-    font-size: 16px;
-    line-height: 1.5;
-    white-space: normal;
+  .section_2 .swiper-pagination {
+    text-align: center;
+    margin-top: 20px;
   }
 }
 
@@ -1091,6 +1057,7 @@ header .top-bar .logo_box > a {
     align-items: center;
     text-align: center;
     padding: 60px 20px;
+    min-height: auto;
   }
 
   .section_4 .event-text-box {
@@ -1116,6 +1083,7 @@ header .top-bar .logo_box > a {
     margin-top: 10px;
   }
   .section_4 .event-controls {
+    position: static;
     margin-top: 40px;
   }
 
@@ -1282,67 +1250,38 @@ header .top-bar .logo_box > a {
 }
 
 /* 2섹션 */
-
 @media (max-width: 370px) {
-  .section_2 {
-    height: auto;
+  .section_2 .room-swiper .swiper-slide.part {
+    margin: 0;
   }
 
-  .section_2 h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  .section_2 .box-1__head {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section_2 .box-1__head .head-btn {
+  .section_2 .img-text h3 {
     font-size: 20px;
-    padding: 6px;
+  }
+  .section_2 .img-text p {
+    font-size: 13px;
+  }
+  .section_2 .hover-text h3 {
+    font-size: 20px;
+  }
+  .section_2 .hover-text p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .section_2 .swiper-pagination-bullet-active {
+    background: #4aa0b5;
+    opacity: 1;
+  }
+  .section_2 h1 {
+    font-size: 26px;
+  }
+  .section_2 .box-1__head .head-btn {
+    font-size: 18px;
+    padding: 4px;
   }
 
   .section_2 .box-1__head ul li a {
     font-size: 14px;
-  }
-
-  .section_2 .part-wrap {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .section_2 .part {
-    width: 100%;
-    height: auto;
-    margin-inline: 0;
-  }
-
-  .section_2 .part img {
-    height: 240px;
-    filter: brightness(0.6);
-  }
-
-  .section_2 .img-text h3 {
-    font-size: 22px;
-  }
-
-  .section_2 .img-text p {
-    font-size: 14px;
-  }
-
-  .section_2 .hover-text h3 {
-    font-size: 22px;
-  }
-
-  .section_2 .hover-text p {
-    font-size: 14px;
-    line-height: 1.4;
-    white-space: normal;
-    padding: 0 10px;
   }
 }
 
@@ -1401,6 +1340,8 @@ header .top-bar .logo_box > a {
     align-items: center;
     text-align: center;
     padding: 60px 20px;
+    min-height: auto;
+    gap: 30px;
   }
 
   .section_4 .event-text-box {

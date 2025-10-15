@@ -271,6 +271,87 @@ var eventSwiper = new Swiper(".event-swiper", {
   },
 });
 
+// ✅ 모바일 <-> PC 자동 전환 Swiper 관리
+let roomSwipers = [];
+
+function initRoomSwiper() {
+  const partWraps = document.querySelectorAll(".section_2 .part-wrap");
+
+  partWraps.forEach((wrap, index) => {
+    // 이미 스와이퍼 초기화된 상태면 건너뜀
+    if (wrap.classList.contains("swiper-initialized")) return;
+
+    const parts = wrap.querySelectorAll(".part");
+    if (parts.length > 0) {
+      wrap.classList.add("swiper", `room-swiper-${index}`);
+      const wrapperDiv = document.createElement("div");
+      wrapperDiv.classList.add("swiper-wrapper");
+
+      parts.forEach((part) => {
+        part.classList.add("swiper-slide");
+        wrapperDiv.appendChild(part);
+      });
+
+      wrap.innerHTML = "";
+      wrap.appendChild(wrapperDiv);
+
+      // 페이지네이션 추가
+      const pagination = document.createElement("div");
+      pagination.classList.add("swiper-pagination");
+      wrap.appendChild(pagination);
+
+      // Swiper 실행
+      const swiper = new Swiper(`.room-swiper-${index}`, {
+        slidesPerView: 1, // 살짝 옆이 보이는 카드형
+        spaceBetween: 0,
+        centeredSlides: false,
+        pagination: {
+          el: `.room-swiper-${index} .swiper-pagination`,
+          clickable: true,
+        },
+      });
+
+      roomSwipers.push(swiper);
+    }
+  });
+}
+
+function destroyRoomSwiper() {
+  // 기존에 실행된 swiper 전부 제거
+  roomSwipers.forEach((swiper) => swiper.destroy(true, true));
+  roomSwipers = [];
+
+  // 원래 구조로 복원
+  const partWraps = document.querySelectorAll(".section_2 .part-wrap.swiper");
+  partWraps.forEach((wrap) => {
+    const slides = wrap.querySelectorAll(".swiper-slide.part");
+    const newWrap = document.createElement("div");
+    newWrap.classList.add("part-wrap");
+
+    slides.forEach((slide) => {
+      slide.classList.remove("swiper-slide");
+      newWrap.appendChild(slide);
+    });
+
+    wrap.replaceWith(newWrap);
+  });
+}
+
+function handleResize() {
+  if (window.innerWidth <= 768 && roomSwipers.length === 0) {
+    initRoomSwiper();
+  } else if (window.innerWidth > 768 && roomSwipers.length > 0) {
+    destroyRoomSwiper();
+  }
+}
+
+// 초기 실행 + 리사이즈 감시
+handleResize();
+window.addEventListener("resize", () => {
+  clearTimeout(window._resizeTimer);
+  window._resizeTimer = setTimeout(handleResize, 300);
+});
+
 /* -----------------------------------------------------
    실행
 ----------------------------------------------------- */
