@@ -422,6 +422,7 @@ header .top-bar .logo_box > a {
   overflow: hidden;
 
   h1 {
+    padding-bottom: 20px;
     text-align: center;
     font-family: "Lora", serif;
   }
@@ -435,6 +436,7 @@ header .top-bar .logo_box > a {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 20px;
 
   .swiper-container {
     width: 50%;
@@ -486,6 +488,7 @@ header .top-bar .logo_box > a {
 .section_2 .part-wrap {
   display: flex;
   box-sizing: border-box;
+  padding: 20px;
 }
 
 /* 각 섹션 비율 */
@@ -603,7 +606,7 @@ header .top-bar .logo_box > a {
 
 /* 중간 슬로건2 시작 */
 .divider-2 {
-  padding: 150px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -994,7 +997,6 @@ header .top-bar .logo_box > a {
 @media (max-width: 768px) {
   .section_2 {
     height: auto;
-    padding: 80px 20px;
   }
 
   .section_2 h1 {
@@ -1011,10 +1013,6 @@ header .top-bar .logo_box > a {
 
   .section_2 .box-1__head .tab-wrapper {
     width: 40%;
-  }
-
-  .section_2 .box-1__head ul {
-    gap: 15px;
   }
 
   .section_2 .box-1__head ul li a {
@@ -1228,6 +1226,17 @@ header .top-bar .logo_box > a {
 
 /* 반응형 370px */
 
+/* header  */
+@media (max-width: 370px) {
+  header {
+    height: 60px;
+  }
+  .logo_box img {
+    height: 28px;
+    width: auto;
+  }
+}
+
 /* 1섹션 */
 
 @media (max-width: 370px) {
@@ -1251,7 +1260,7 @@ header .top-bar .logo_box > a {
   }
 
   .section_1 .text-box .title-2 {
-    font-size: 28px;
+    font-size: 25px;
   }
   .section_1 .swiper-button-prev::after,
   .section_1 .swiper-button-next::after {
@@ -1277,7 +1286,6 @@ header .top-bar .logo_box > a {
 @media (max-width: 370px) {
   .section_2 {
     height: auto;
-    padding: 60px 15px;
   }
 
   .section_2 h1 {
@@ -1295,10 +1303,6 @@ header .top-bar .logo_box > a {
   .section_2 .box-1__head .head-btn {
     font-size: 20px;
     padding: 6px;
-  }
-
-  .section_2 .box-1__head ul {
-    gap: 10px;
   }
 
   .section_2 .box-1__head ul li a {
@@ -1494,7 +1498,7 @@ header .top-bar .logo_box > a {
   .section_6 .icon-box {
     justify-content: center;
     gap: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   .section_6 .icon-box i {
     font-size: 18px;
@@ -1512,6 +1516,7 @@ header .top-bar .logo_box > a {
     transform: none;
     justify-content: center;
     margin-top: 30px;
+    margin-bottom: 30px;
   }
   .section_6 .footer-bg-box {
     position: static;
