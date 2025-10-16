@@ -295,11 +295,6 @@ function initRoomSwiper() {
       wrap.innerHTML = "";
       wrap.appendChild(wrapperDiv);
 
-      // 페이지네이션 추가
-      const pagination = document.createElement("div");
-      pagination.classList.add("swiper-pagination");
-      wrap.appendChild(pagination);
-
       // Swiper 실행
       const swiper = new Swiper(`.room-swiper-${index}`, {
         slidesPerView: 1, // 살짝 옆이 보이는 카드형
