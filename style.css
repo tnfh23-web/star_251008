@@ -606,7 +606,7 @@ header .top-bar .logo_box > a {
 
 /* 중간 슬로건2 시작 */
 .divider-2 {
-  padding: 50px;
+  margin: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1084,7 +1084,7 @@ header .top-bar .logo_box > a {
   }
   .section_4 .event-controls {
     position: static;
-    margin-top: 40px;
+    margin-top: 0px;
   }
 
   .section_4 .event-swiper {
@@ -1301,6 +1301,7 @@ header .top-bar .logo_box > a {
 @media (max-width: 370px) {
   .divider-2 {
     white-space: nowrap;
+    margin: 40px;
   }
   .divider-2-text-1 {
     font-size: 18px;
