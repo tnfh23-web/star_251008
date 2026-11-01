@@ -3,7 +3,8 @@
   'use strict';
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  // Preserve the site's motion independently of operating-system preferences.
+  const motionPreferences = { reduce: false };
   const mobile = matchMedia('(max-width: 1024px)');
   const gs = window.gsap;
   const hasMotion = !!(gs && window.ScrollTrigger);
@@ -17,7 +18,7 @@
   function setupSmoothScroll() {
     if (!hasMotion || !window.ScrollSmoother) return;
     gs.registerPlugin(ScrollSmoother);
-    gs.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
+    gs.matchMedia().add('all', () => {
       smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: .9, smoothTouch: .1, effects: false, onFocusIn: (_, event) => event.target.matches('section, #brand') || event.target.closest('.slide-menu') ? false : undefined });
       if (menuOpen || document.body.getAttribute('aria-busy') === 'true') smoother.paused(true);
       return () => {
@@ -70,7 +71,7 @@
   }
   function revealRoom(panel) {
     finishAnimation('rooms');
-    if (!gs || reduced.matches) return;
+    if (!gs || motionPreferences.reduce) return;
     const cards = $$('.part', panel);
     const tl = gs.timeline(); animations.set('rooms', tl);
     openImages(tl, cards, 0);
@@ -198,13 +199,13 @@
     const duration = 6;
     function animateSlide(slide) {
       finishAnimation('hero');
-      if (!gs || reduced.matches) return;
+      if (!gs || motionPreferences.reduce) return;
       const tl = gs.timeline(); animations.set('hero', tl);
       tl.fromTo($('img', slide), { scale: 1.045 }, { scale: 1, duration: 1.5, ease: 'power2.out', clearProps: 'transform' }, 0);
       lines(tl, [$('h1, h2', slide)], .12);
       tl.fromTo($('.title-1', slide), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .65, clearProps: 'transform,opacity' }, .34);
     }
-    function suspended() { return !ready || userPaused || reduced.matches || menuOpen || document.hidden || !heroVisible; }
+    function suspended() { return !ready || userPaused || motionPreferences.reduce || menuOpen || document.hidden || !heroVisible; }
     function refreshPlayback() {
       const paused = suspended();
       cycle?.paused(paused);
@@ -212,10 +213,10 @@
         clearTimeout(fallbackTimer);
         if (!paused) fallbackTimer = setTimeout(() => show(selected + 1), duration * 1000);
       }
-      play.disabled = reduced.matches;
-      play.setAttribute('aria-pressed', String(userPaused || reduced.matches));
+      play.disabled = motionPreferences.reduce;
+      play.setAttribute('aria-pressed', String(userPaused || motionPreferences.reduce));
       play.setAttribute('aria-label', userPaused ? '자동 슬라이드 재생' : '자동 슬라이드 일시정지');
-      play.textContent = userPaused || reduced.matches ? '▶' : 'Ⅱ';
+      play.textContent = userPaused || motionPreferences.reduce ? '▶' : 'Ⅱ';
     }
     function restartCycle() {
       cycle?.kill(); clearTimeout(fallbackTimer);
@@ -241,7 +242,6 @@
     play.addEventListener('click', () => { userPaused = !userPaused; refreshPlayback(); });
     document.addEventListener('visibilitychange', refreshPlayback);
     new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; refreshPlayback(); }).observe(root);
-    reduced.addEventListener('change', () => { if (reduced.matches) finishAnimation('hero'); refreshPlayback(); });
     show(0, false);
     return { start() { ready = true; animateSlide(slides[selected]); restartCycle(); }, refreshPlayback };
   }
@@ -295,7 +295,7 @@
         if (restoreFocus) trigger.focus({ preventScroll: true });
         else if (menu.contains(document.activeElement)) document.activeElement.blur();
         menu.inert = true; menu.classList.add('closing'); menu.classList.remove('active');
-        if (reduced.matches) finishClose();
+        if (motionPreferences.reduce) finishClose();
         else closeTimer = setTimeout(finishClose, 650);
       }
       heroController?.refreshPlayback();
@@ -350,7 +350,7 @@
       on: { slideChangeTransitionStart() {
         if ($('.section_3').dataset.entry !== 'entered') return;
         const slide = this.slides[this.activeIndex]; finishAnimation('facility');
-        if (!gs || reduced.matches || !slide) return;
+        if (!gs || motionPreferences.reduce || !slide) return;
         const tl = gs.timeline(); animations.set('facility', tl);
         lines(tl, $$('h2, p', slide), .08);
       } },
@@ -366,7 +366,7 @@
 
   function setupEntrances() {
     if (!hasMotion) return;
-    gs.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
+    gs.matchMedia().add('all', () => {
       const groups = [];
       function group(root, build, targets) {
         if (!root || root.dataset.entry === 'entered') return;
@@ -401,7 +401,7 @@
 
   function setupFooterCover() {
     if (!hasMotion) return;
-    gs.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
+    gs.matchMedia().add('all', () => {
       const previous = $('#sec5'), footer = $('footer');
       const pin = ScrollTrigger.create({
         trigger: previous, start: () => previous.offsetHeight < innerHeight ? 'top top' : 'bottom bottom',
@@ -452,10 +452,9 @@
       const delay = Math.max(0, .9 - (performance.now() - startedAt) / 1000);
       if (gs && loading) {
         exitGuard = setTimeout(finish, (delay + .8) * 1000);
-        gs.to(loading, { opacity: 0, delay, duration: reduced.matches ? 0 : .55, ease: 'power1.inOut', onComplete: finish });
+        gs.to(loading, { opacity: 0, delay, duration: motionPreferences.reduce ? 0 : .55, ease: 'power1.inOut', onComplete: finish });
       } else exitGuard = setTimeout(finish, delay * 1000);
     }
   }
-  reduced.addEventListener('change', () => { if (reduced.matches) [...animations.keys()].forEach(finishAnimation); });
   start();
 })();

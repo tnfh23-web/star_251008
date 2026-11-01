@@ -325,8 +325,3 @@ footer { position: relative; z-index: 2; background: var(--brand); }
   .menu-inner { max-height: calc(100svh - 80px); margin-top: 70px; overflow-y: auto; }
   .section_1 .slider { min-height: 520px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
-  .entry-ink { transform: none !important; }
-  .event-marquee-track { animation: none; transform: none; }
-}
